@@ -12,16 +12,16 @@
 * urllib
 * lxml
 ## 本地化
-···
+```
 git clone https://github.com/Reqin/LessWord/
 cd LessWord
 python LessWords.py
-···
+```
 ## 打包为exe
 ### 依赖
 * pyinstaller>3.4
 ### 打包
-···
+```
 python installer.py
-···
+```
 打包好的程序放在项目根目录·dist·文件夹中，中间过程文件存放在·build·文件夹中
