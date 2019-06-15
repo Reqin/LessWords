@@ -1,6 +1,6 @@
 # LessWord
 ## 简介
-一个背单词查单词的软件实现，主要使用了爬虫、tkinter；后期打包使用的pyinstaller。
+一个背单词查单词的软件，主要使用了爬虫、tkinter；后期打包使用的pyinstaller。
 ## 依赖
 * python>=3.6
 * os
