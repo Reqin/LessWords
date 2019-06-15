@@ -28,3 +28,6 @@ python installer.py
 
 # 注
 主应用程序必须和`img`目录位于同一目录下
+
+# 展示
+![软件使用](https://user-images.githubusercontent.com/27119852/59552488-38bb5180-8fba-11e9-8dd0-8d8eb4d6d883.gif)
