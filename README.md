@@ -19,7 +19,7 @@ python LessWords.py
 ```
 ## 打包为exe
 ### 依赖
-* pyinstaller>3.4
+* pyinstaller>=3.4
 ### 打包
 ```
 python installer.py
