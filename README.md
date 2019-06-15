@@ -31,3 +31,4 @@ python installer.py
 
 # 展示
 ![软件使用](https://user-images.githubusercontent.com/27119852/59552488-38bb5180-8fba-11e9-8dd0-8d8eb4d6d883.gif)
+
