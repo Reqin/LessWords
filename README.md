@@ -24,4 +24,4 @@ python LessWords.py
 ```
 python installer.py
 ```
-打包好的程序放在项目根目录·dist·文件夹中，中间过程文件存放在·build·文件夹中
+打包好的程序放在项目根目录`dist`文件夹中，中间过程文件存放在`build`文件夹中
