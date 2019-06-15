@@ -34,8 +34,3 @@ class Configurator:
     def config_flush(self, value):
         with open(self.file_path, 'wb') as f:
             pickle.dump(value, f)
-
-
-if __name__ == "__main__":
-    c = Configurator('D:\\www\\python\\lessWords\\data\\config.pkl')
-    print(c.config['MAJOR_DATA_PATH'])

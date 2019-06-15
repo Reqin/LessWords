@@ -8,6 +8,8 @@ from tkinter import ttk
 class MyGUI(tk.Tk):
     def __init__(self, processor):
         super().__init__()
+        self.iconbitmap(processor.configurator.config['ICONS']['app'])
+        self.title('less word')
         self.processor = processor
         self.batch_flag = 0
         self.batch_size = 10
@@ -57,7 +59,6 @@ class MyGUI(tk.Tk):
         current_batch = word_dict[start:stop]
         self.fresh_word_batch(current_batch)
         self.batch_flag = stop
-        print(start, stop)
 
     def next_word_batch(self):
         word_dict = list(self.processor.myDict.value.values())
@@ -134,12 +135,19 @@ class MyGUI(tk.Tk):
         self.build_left_frame(left_frame)
         self.build_right_frame(right_frame)
 
+    def get_img(self,name):
+        name_l = name.split('.')
+        ture_name = self.processor.configurator.config
+        for name in name_l:
+            ture_name = ture_name[name]
+        return tk.PhotoImage(file=ture_name)
+
     def init_data(self):
         img = {
-            'search_bg_img': tk.PhotoImage(file='D:\\www\\python\\lessWords\\img\\icons\\search_0.png'),
-            'go_previous_bg_img': tk.PhotoImage(file='D:\\www\\python\\lessWords\\img\\icons\\go_previous_1.png'),
-            'go_next_bg_img': tk.PhotoImage(file='D:\\www\\python\\lessWords\\img\\icons\\go_next_1.png'),
-            'fill_bg_img': tk.PhotoImage(file='D:\\www\\python\\lessWords\\img\\icons\\fill_50x35_0.png')
+            'search_bg_img': self.get_img('ICONS.search_0'),
+            'go_previous_bg_img': self.get_img('ICONS.go_pre_0'),
+            'go_next_bg_img': self.get_img('ICONS.go_next_0'),
+            'fill_bg_img': self.get_img('ICONS.fill_0'),
         }
         return img
 
@@ -230,6 +238,7 @@ class MyGUI(tk.Tk):
         master.update()
         self.target_word_sentences = tk.Text(
             master,
+            borderwidth=0,
             font=('Ostrich Sans', 19),
             width=0,
             wrap=tk.WORD,
@@ -239,8 +248,6 @@ class MyGUI(tk.Tk):
             column=0,
             row=5,
             columnspan=10,
-            pady=2,
-            padx=1,
             sticky=tk.NSEW
         )
 
@@ -252,11 +259,13 @@ class MyGUI(tk.Tk):
             column=0,
             row=0,
             pady=2,
-            padx=1
         )
         self.word_list = tk.Listbox(
             list_frame,
             borderwidth=0,
+            highlightthickness=0,
+            selectbackground='#C7EDCC',
+            selectforeground='blue',
             font=('Ostrich Sans', 19),
             width=300,
             height=40,
@@ -265,8 +274,6 @@ class MyGUI(tk.Tk):
         self.word_list.grid(
             column=0,
             row=0,
-            pady=2,
-            padx=1
         )
         # bind event
         self.word_list.bind('<Double-Button-1>', self.word_list_click)
@@ -321,7 +328,3 @@ class MyGUI(tk.Tk):
             sticky=(tk.N, tk.W),
         )
 
-
-if __name__ == "__main__":
-    for i in range(2):
-        print(i)

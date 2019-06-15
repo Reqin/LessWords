@@ -1,10 +1,17 @@
 # 本地数据文件夹
-data/
+/data/
 # 小型test和debug
 /test.py*
+# 部分素材图片
+/img/pre/
+# pyinstaller 工作目录
+/build/
+/dist/
 
-# ...
+
+
+
+# vscode is not as good as pycharm @ python
 */__pycache__
 */.vscode
 */.vscode/
-*/.vscode/*

@@ -6,13 +6,15 @@ ROOT_PATH = os.path.abspath(os.path.curdir)
 DATA_PATH = ROOT_PATH + os.path.sep + 'data' + os.path.sep
 CONFIG_PATH = DATA_PATH + 'config.pkl'
 MAJOR_DATA_PATH = DATA_PATH + 'major.pkl'
+ICONS_PATH = ROOT_PATH + os.path.sep + \
+    'img' + os.path.sep + 'icons' + os.path.sep
 
 
-def init():
+def init(force = False):
     a = os.path.exists(DATA_PATH)
     b = os.path.exists(CONFIG_PATH)
     c = os.path.exists(MAJOR_DATA_PATH)
-    if a & b & c:
+    if a and b and c and not force:
         return True
     config = {
         'ROOT_PATH': ROOT_PATH,
@@ -28,6 +30,13 @@ def init():
                     'example_sentences': '//*[@class="examples"]/p/text()'
                 }
             }
+        },
+        'ICONS':{
+            'app': ICONS_PATH + 'app.ico',
+            'search_0': ICONS_PATH + 'search_0.png',
+            'fill_0': ICONS_PATH + 'fill_48x35_0.png',
+            'go_pre_0':ICONS_PATH + 'go_previous_0.png',
+            'go_next_0':ICONS_PATH + 'go_next_0.png'
         }
     }
     if not os.path.exists(DATA_PATH):
@@ -37,3 +46,6 @@ def init():
     with open(CONFIG_PATH, 'wb') as f:
         pickle.dump(config, f)
     return True
+
+if __name__ == "__main__":
+    init(True)
