@@ -25,3 +25,6 @@ python LessWords.py
 python installer.py
 ```
 打包好的程序放在项目根目录`dist`文件夹中，中间过程文件存放在`build`文件夹中
+
+# 注
+主应用程序必须和`img`目录位于同一目录下
