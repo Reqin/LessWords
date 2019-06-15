@@ -1,2 +1,10 @@
+# 本地数据文件夹
 data/
+# 小型test和debug
 /test.py*
+
+# ...
+*/__pycache__
+*/.vscode
+*/.vscode/
+*/.vscode/*
