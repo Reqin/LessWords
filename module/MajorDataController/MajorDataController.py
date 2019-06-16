@@ -1,7 +1,6 @@
 # coding:utf8
 import pickle
 
-
 class MajorDataController:
     def __init__(self, configurator):
         self.file_path = configurator.config['MAJOR_DATA_PATH']

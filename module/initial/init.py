@@ -10,24 +10,14 @@ MAJOR_DATA_PATH = DATA_PATH + 'major.pkl'
 ICONS_PATH = ROOT_PATH + os.path.sep + \
              'img' + os.path.sep + 'icons' + os.path.sep
 
-
-# @restart
-# def restart():
-#     exe = sys.executable
-#     target = ROOT_PATH +  str(* sys.argv)[1:]
-#     # target = str(* sys.argv)
-#     # cline = str(exe) + ' ' + str(target)
-#     cline = 'start' + ' ' + str(exe) + ' ' + str(target) + '-w'
-#     import subprocess
-#     os.system(cline)
-#     # exit()
 def log(info):
     print(info)
 
 
 def before_start(func):
     if os.path.exists(START_LOCK_PATH):
-        pass
+        info = 'It seems that the program was not shut down correctly last time. You may need to delete the `start. lock` file in the root directory manually before you can run the program correctly.\nmaybe use\n `rm start.lock`'
+        raise FileExistsError(info)
     else:
         try:
             with open(START_LOCK_PATH, 'w'):
