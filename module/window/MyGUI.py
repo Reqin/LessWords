@@ -1,5 +1,4 @@
 # coding:utf8
-import os,sys
 import tkinter as tk
 from tkinter import ttk
 
@@ -136,7 +135,7 @@ class MyGUI(tk.Tk):
         self.build_left_frame(left_frame)
         self.build_right_frame(right_frame)
 
-    def get_img(self,name):
+    def get_img(self, name):
         name_l = name.split('.')
         ture_name = self.processor.configurator.config
         for name in name_l:
@@ -228,7 +227,6 @@ class MyGUI(tk.Tk):
         )
         # target word example sentences
         # info
-        # info
         tk.Label(
             master, text='example sentences:', font=('楷体', 19), background='Lavender', justify=tk.LEFT, anchor=tk.W
         ).grid(
@@ -303,15 +301,15 @@ class MyGUI(tk.Tk):
             columnspan=1,
             sticky=(tk.N, tk.W),
         )
-        commands = [self.ctrl_c,self.ctrl_t,self.ctrl_r,self.ctrl_l]
-        text_ctrl = ['c','t','r','l']
-        for i,command in zip(range(4),commands):
+        commands = [self.ctrl_c, self.ctrl_t, self.ctrl_r, self.ctrl_l]
+        text_ctrl = ['c', 't', 'r', 'l']
+        for i, command in zip(range(4), commands):
             tk.Button(
                 button_frame,
-                text= text_ctrl[i],
-                font=('',19),
+                text=text_ctrl[i],
+                font=('', 19),
                 fg='blue',
-                command = command,
+                command=command,
                 compound='center',
                 image=self.pre_data['fill_bg_img'],
                 bd=0,
@@ -338,7 +336,7 @@ class MyGUI(tk.Tk):
 
     def ctrl_c(self):
         self.ctrl_i = 1
-            
+
     def ctrl_t(self):
         if self.ctrl_i != 1:
             self.ctrl_i = 0
@@ -358,5 +356,5 @@ class MyGUI(tk.Tk):
         if self.ctrl_i < 7:
             self.ctrl_i += 1
             return
-        os.remove(self.processor.configurator.config['MAJOR_DATA_PATH'])
-        self.quit()
+        self.processor.myDict.flush()
+        self.next_word_batch()

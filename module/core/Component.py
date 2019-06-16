@@ -8,8 +8,6 @@ class Name(str):
 
     def __set__(self, instance, value):
         self.value = value
-        # print(instance.my_dict.value)
-        # exit()
         if not instance.my_dict.search(self.value):
             # crawling
             result = instance.spider.parse(value)
@@ -53,6 +51,7 @@ class MyDict:
         self.value = self.dataController.read()
         if not isinstance(self.value, dict):
             self.value = dict()
+            print(999)
             self.dataController.dict_flush(self.value)
 
     def search(self, word_name):
@@ -63,7 +62,11 @@ class MyDict:
 
     def add_word(self, word):
         self.value[word['name'][0]] = word
-        self.dataController.dict_flush(self.value)
+        self.dataController.flush(self.value)
+
+    def flush(self):
+        self.value = {}
+        self.dataController.flush(self.value)
 
 
 class Word:
@@ -74,12 +77,3 @@ class Word:
     def __init__(self, my_dict, spider):
         self.my_dict = my_dict
         self.spider = spider
-# class Word:
-#     my_dict = MyDict()
-#     name = Name()
-#     interpretation = Interpretation()
-#     example_sentences = ExampleSentences()
-
-#     def __init__(self, manager,spider):
-#         self.manager = manager
-#         self.spider = spider
