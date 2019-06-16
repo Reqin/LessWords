@@ -30,10 +30,14 @@ python installer.py
 # 注
 主应用程序必须和`img`目录位于同一目录下
 ## 你可能会遇到的问题
-**若脚本获程序无法执行，请查看程序目录是否存在`start.lock`文件，如果存在，将它删除**
+**若脚本或程序无法执行，请查看程序目录是否存在`start.lock`文件，如果存在，将它删除**
+
+
 
 # 展示
 ![软件使用](https://user-images.githubusercontent.com/27119852/59552488-38bb5180-8fba-11e9-8dd0-8d8eb4d6d883.gif)
+
+
 
 # version 1.2
 ## 添加控制器
