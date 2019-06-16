@@ -42,3 +42,5 @@ python installer.py
   * 速记：
     唱、跳、rap、篮球之后再打四次篮球
   
+### 效果
+![清空效果](https://user-images.githubusercontent.com/27119852/59561152-5c7ca700-904f-11e9-9922-2de120e5493f.gif)
