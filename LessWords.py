@@ -1,6 +1,9 @@
-from module.initial.init import init
+import os
+from module.initial.init import init, start
 
 if __name__ == "__main__":
     if init():
         from module.access.access import main
-        main()
+        print(start)
+        # exit()
+        start(main)

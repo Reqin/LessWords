@@ -1,13 +1,13 @@
 # coding:utf8
-import time
+import os,sys
 import tkinter as tk
 from tkinter import ttk
-# from module.window.ScrollFrame import ScrollFrame
 
 
 class MyGUI(tk.Tk):
     def __init__(self, processor):
         super().__init__()
+        self.ctrl_i = 0
         self.iconbitmap(processor.configurator.config['ICONS']['app'])
         self.title('less word')
         self.processor = processor
@@ -87,7 +87,8 @@ class MyGUI(tk.Tk):
     def set_word_interpretation(self):
         word_interpretation = ''
         for one_interpretation in self.processor.word.interpretation:
-            word_interpretation += one_interpretation + '\n'
+            word_interpretation += '\n' + one_interpretation
+        word_interpretation += '\n'
         self.target_word_interpretation.set(word_interpretation)
 
     def set_word_eg_sentences(self):
@@ -302,17 +303,24 @@ class MyGUI(tk.Tk):
             columnspan=1,
             sticky=(tk.N, tk.W),
         )
-        for i in range(4):
+        commands = [self.ctrl_c,self.ctrl_t,self.ctrl_r,self.ctrl_l]
+        text_ctrl = ['c','t','r','l']
+        for i,command in zip(range(4),commands):
             tk.Button(
                 button_frame,
+                text= text_ctrl[i],
+                font=('',19),
+                fg='blue',
+                command = command,
+                compound='center',
                 image=self.pre_data['fill_bg_img'],
-                borderwidth=0,
-                relief='ridge',
+                bd=0,
+                padx=0,
+                pady=0,
             ).grid(
                 column=i+2,
                 row=0,
-                columnspan=1,
-                sticky=(tk.N, tk.W),
+                sticky=tk.NS,
             )
         # button go next
         tk.Button(
@@ -328,3 +336,27 @@ class MyGUI(tk.Tk):
             sticky=(tk.N, tk.W),
         )
 
+    def ctrl_c(self):
+        self.ctrl_i = 1
+            
+    def ctrl_t(self):
+        if self.ctrl_i != 1:
+            self.ctrl_i = 0
+            return
+        self.ctrl_i += 1
+
+    def ctrl_r(self):
+        if self.ctrl_i != 2:
+            self.ctrl_i = 0
+            return
+        self.ctrl_i += 1
+
+    def ctrl_l(self):
+        if self.ctrl_i < 3:
+            self.ctrl_i = 0
+            return
+        if self.ctrl_i < 7:
+            self.ctrl_i += 1
+            return
+        os.remove(self.processor.configurator.config['MAJOR_DATA_PATH'])
+        self.quit()

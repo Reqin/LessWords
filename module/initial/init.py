@@ -1,8 +1,9 @@
 # -*- coding: UTF-8 -*-
-import os
+import os,sys
 import pickle
 
 ROOT_PATH = os.path.abspath(os.path.curdir)
+START_LOCK_PATH = ROOT_PATH + os.path.sep + 'start.lock'
 DATA_PATH = ROOT_PATH + os.path.sep + 'data' + os.path.sep
 CONFIG_PATH = DATA_PATH + 'config.pkl'
 MAJOR_DATA_PATH = DATA_PATH + 'major.pkl'
@@ -10,7 +11,43 @@ ICONS_PATH = ROOT_PATH + os.path.sep + \
     'img' + os.path.sep + 'icons' + os.path.sep
 
 
-def init(force = False):
+# @restart
+# def restart():
+#     exe = sys.executable
+#     target = ROOT_PATH +  str(* sys.argv)[1:]
+#     # target = str(* sys.argv)
+#     # cline = str(exe) + ' ' + str(target)
+#     cline = 'start' + ' ' + str(exe) + ' ' + str(target) + '-w'
+#     import subprocess
+#     os.system(cline)
+#     # exit()
+def log(info):
+    print(info)
+
+def before_start(func):
+    if os.path.exists(START_LOCK_PATH):
+        exit()
+    else:
+        try:
+            with open(START_LOCK_PATH,'w'):
+                pass
+        except Exception:
+            log('start warning@'+START_LOCK_PATH)
+    return func
+
+def app_exit():
+    try:
+        os.remove(START_LOCK_PATH)
+    except:
+        log('lock file warning')
+    return True
+
+@before_start
+def start(app_main_func):
+    app_main_func()
+    return app_exit()
+
+def init(force=False):
     a = os.path.exists(DATA_PATH)
     b = os.path.exists(CONFIG_PATH)
     c = os.path.exists(MAJOR_DATA_PATH)
@@ -18,6 +55,7 @@ def init(force = False):
         return True
     config = {
         'ROOT_PATH': ROOT_PATH,
+        'START_LOCK': START_LOCK_PATH,
         'DATA_PATH': DATA_PATH,
         'CONFIG_PATH': CONFIG_PATH,
         'MAJOR_DATA_PATH': MAJOR_DATA_PATH,
@@ -31,12 +69,12 @@ def init(force = False):
                 }
             }
         },
-        'ICONS':{
+        'ICONS': {
             'app': ICONS_PATH + 'app.ico',
             'search_0': ICONS_PATH + 'search_0.png',
             'fill_0': ICONS_PATH + 'fill_48x35_0.png',
-            'go_pre_0':ICONS_PATH + 'go_previous_0.png',
-            'go_next_0':ICONS_PATH + 'go_next_0.png'
+            'go_pre_0': ICONS_PATH + 'go_previous_0.png',
+            'go_next_0': ICONS_PATH + 'go_next_0.png'
         }
     }
     if not os.path.exists(DATA_PATH):
@@ -46,6 +84,7 @@ def init(force = False):
     with open(CONFIG_PATH, 'wb') as f:
         pickle.dump(config, f)
     return True
+
 
 if __name__ == "__main__":
     init(True)
