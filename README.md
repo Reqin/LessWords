@@ -4,6 +4,7 @@
 ## 依赖
 * python>=3.6
 * os
+* platform
 * shutil
 * time
 * abc
