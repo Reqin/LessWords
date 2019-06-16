@@ -32,3 +32,13 @@ python installer.py
 # 展示
 ![软件使用](https://user-images.githubusercontent.com/27119852/59552488-38bb5180-8fba-11e9-8dd0-8d8eb4d6d883.gif)
 
+# version 1.2
+## 添加控制器
+新增c、t、r、l控制
+### 如何控制
+目前通过c、t、r、l可以实现已查询单词的重置
+* 控制方法：
+  `c``t``r``l``l``l``l``l``l
+  * 速记：
+    唱、跳、rap、篮球之后再打四次篮球
+  
