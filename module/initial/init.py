@@ -17,7 +17,8 @@ def log(info):
 def before_start(func):
     if os.path.exists(START_LOCK_PATH):
         info = 'It seems that the program was not shut down correctly last time. You may need to delete the `start. lock` file in the root directory manually before you can run the program correctly.\nmaybe use\n `rm start.lock`'
-        raise FileExistsError(info)
+        log(info)
+        exit()
     else:
         try:
             with open(START_LOCK_PATH, 'w'):
