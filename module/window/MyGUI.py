@@ -1,6 +1,5 @@
 # coding:utf8
 import platform
-import chardet
 import tkinter as tk
 from tkinter import ttk
 
