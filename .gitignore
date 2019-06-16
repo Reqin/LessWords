@@ -16,6 +16,6 @@
 */.vscode/
 __pycache__/
 *.pyc
-/.idea
+/.idea/
 
 
