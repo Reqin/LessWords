@@ -13,7 +13,13 @@
 
 
 # vscode is not as good as pycharm @ python
-__pycache__/
-*/__pycache__
-*/.vscode
 */.vscode/
+__pycache__/
+module/access/__pycache__/
+module/configurator/__pycache__/
+module/core/__pycache__/
+module/initial/__pycache__/
+module/MajorDataController/__pycache__/
+module/spider/__pycache__/
+module/windows/__pycache__/
+
