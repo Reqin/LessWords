@@ -15,5 +15,7 @@
 # vscode is not as good as pycharm @ python
 */.vscode/
 __pycache__/
+*.pyc
+/.idea
 
 

@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-import os,sys
+import os, sys
 import pickle
 
 ROOT_PATH = os.path.abspath(os.path.curdir)
@@ -8,7 +8,7 @@ DATA_PATH = ROOT_PATH + os.path.sep + 'data' + os.path.sep
 CONFIG_PATH = DATA_PATH + 'config.pkl'
 MAJOR_DATA_PATH = DATA_PATH + 'major.pkl'
 ICONS_PATH = ROOT_PATH + os.path.sep + \
-    'img' + os.path.sep + 'icons' + os.path.sep
+             'img' + os.path.sep + 'icons' + os.path.sep
 
 
 # @restart
@@ -24,16 +24,18 @@ ICONS_PATH = ROOT_PATH + os.path.sep + \
 def log(info):
     print(info)
 
+
 def before_start(func):
     if os.path.exists(START_LOCK_PATH):
-        exit()
+        pass
     else:
         try:
-            with open(START_LOCK_PATH,'w'):
+            with open(START_LOCK_PATH, 'w'):
                 pass
         except Exception:
-            log('start warning@'+START_LOCK_PATH)
+            log('start warning@' + START_LOCK_PATH)
     return func
+
 
 def app_exit():
     try:
@@ -42,10 +44,12 @@ def app_exit():
         log('lock file warning')
     return True
 
+
 @before_start
 def start(app_main_func):
     app_main_func()
     return app_exit()
+
 
 def init(force=False):
     a = os.path.exists(DATA_PATH)

@@ -1,4 +1,6 @@
 # coding:utf8
+import platform
+import chardet
 import tkinter as tk
 from tkinter import ttk
 
@@ -7,7 +9,8 @@ class MyGUI(tk.Tk):
     def __init__(self, processor):
         super().__init__()
         self.ctrl_i = 0
-        self.iconbitmap(processor.configurator.config['ICONS']['app'])
+        if 'Windows' == platform.system():
+            self.iconbitmap(processor.configurator.config['ICONS']['app'])
         self.title('less word')
         self.processor = processor
         self.batch_flag = 0
@@ -15,7 +18,7 @@ class MyGUI(tk.Tk):
         self.x = 950
         self.y = 800
         self.attributes("-alpha", 0.98)
-        self.geo_conf = str(self.x)+'x'+str(self.y)
+        self.geo_conf = str(self.x) + 'x' + str(self.y)
         self.geometry(self.geo_conf)
         self.resizable(width=False, height=False)
         self.build()
@@ -37,7 +40,7 @@ class MyGUI(tk.Tk):
         while self.word_list.size() > 0:
             self.word_list.delete(tk.END)
         for i, word in zip(range(len(word_batch)), word_batch):
-            self.word_list.insert(tk.END, str(i+1) + '.' + word['name'][0])
+            self.word_list.insert(tk.END, str(i + 1) + '.' + word['name'][0])
 
     def fresh_current_batch(self):
         word_dict = list(self.processor.myDict.value.values())
@@ -47,7 +50,7 @@ class MyGUI(tk.Tk):
     def init_word_batch(self):
         word_dict = list(self.processor.myDict.value.values())
         self.fresh_word_batch(
-            word_dict[self.batch_flag:self.batch_flag+self.batch_size])
+            word_dict[self.batch_flag:self.batch_flag + self.batch_size])
 
     def previous_word_batch(self):
         word_dict = list(self.processor.myDict.value.values())
@@ -97,10 +100,10 @@ class MyGUI(tk.Tk):
         es_str = '\n'
         for i, example_sentence in zip(range(list_len), self.processor.word.example_sentences):
             if i % 2 == 0:
-                es_str = '\n'+str(int(i/2+1))+'.' + example_sentence
+                es_str = '\n' + str(int(i / 2 + 1)) + '.' + example_sentence
                 self.target_word_sentences.insert(tk.END, es_str)
             else:
-                es_str = '\n' + ' '*3 + example_sentence + '\n'
+                es_str = '\n' + ' ' * 3 + example_sentence + '\n'
                 self.target_word_sentences.insert(tk.END, es_str)
         self.target_word_sentences.config(state=tk.DISABLED)
 
@@ -109,7 +112,7 @@ class MyGUI(tk.Tk):
         main_pady = 3
         self.pre_data = self.init_data()
         main_frame = tk.Frame(self, bg='#E3EDCD', width=self.x -
-                              main_padx*2, height=self.y-2*main_pady)
+                              main_padx * 2, height=self.y - 2 * main_pady)
         left_frame = tk.Frame(main_frame, bg='#C7EDCC', width=640, height=790)
         right_frame = tk.Frame(main_frame, bg='#C7EDCC', width=310, height=790)
         main_frame.grid_propagate(0)
@@ -135,12 +138,14 @@ class MyGUI(tk.Tk):
         self.build_left_frame(left_frame)
         self.build_right_frame(right_frame)
 
-    def get_img(self, name):
+    def get_img(self, name, getter=None):
+        if getter is None:
+            getter = self.processor.configurator.config
         name_l = name.split('.')
-        ture_name = self.processor.configurator.config
+        img_path = getter
         for name in name_l:
-            ture_name = ture_name[name]
-        return tk.PhotoImage(file=ture_name)
+            img_path = img_path[name]
+        return tk.PhotoImage(file=img_path)
 
     def init_data(self):
         img = {
@@ -250,7 +255,7 @@ class MyGUI(tk.Tk):
             sticky=tk.NSEW
         )
 
-    def build_right_frame(self, master, word_list=[]):
+    def build_right_frame(self, master):
         # use a listbox to display words
         list_frame = tk.Frame(master, bg='Lavender', width=300, height=750)
         list_frame.grid_propagate(0)
@@ -316,7 +321,7 @@ class MyGUI(tk.Tk):
                 padx=0,
                 pady=0,
             ).grid(
-                column=i+2,
+                column=i + 2,
                 row=0,
                 sticky=tk.NS,
             )
